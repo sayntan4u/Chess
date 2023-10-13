@@ -32,6 +32,7 @@ import com.example.chess.model.Piece
 import com.example.chess.ui.theme.ChessTheme
 import com.example.chess.ui.theme.autourOne
 import com.example.chess.view.board
+import com.example.chess.view.playerBox
 
 class MainActivity : ComponentActivity() {
 
@@ -49,50 +50,9 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Row(
-                            modifier = Modifier
-                                //.height(65.dp)
-                                .padding(start = 20.dp, end = 20.dp)
-                                .fillMaxWidth()
-                                .background(Color(0xFF262626), shape = RoundedCornerShape(5.dp))
-                                //.border(1.dp, Color(0xFFffffff), shape = RectangleShape)
-                                .height(60.dp),
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Text(
-                                text = cm.currentSide.toString(),
-                                fontFamily = autourOne,
-                                color = Color(0xFFf5f5f5),
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .padding(10.dp)
-                            )
-                        }
-
-
+                        playerBox(playerName = "Player 1", cm.currentSide, Clan.BLACK)
                         board(cm)
-
-                        Row(
-                            modifier = Modifier
-                                //.height(65.dp)
-                                .padding(start = 20.dp, end = 20.dp)
-                                .fillMaxWidth()
-                                .background(Color(0xFF262626), shape = RoundedCornerShape(5.dp))
-                                //.border(1.dp, Color(0xFFffffff), shape = RectangleShape)
-                                .height(60.dp),
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Text(
-                                text = "Player 2",
-                                fontFamily = autourOne,
-                                color = Color(0xFFf5f5f5),
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .padding(10.dp)
-                            )
-                        }
+                        playerBox(playerName = "Player 2", cm.currentSide, Clan.WHITE)
 
 
                     }

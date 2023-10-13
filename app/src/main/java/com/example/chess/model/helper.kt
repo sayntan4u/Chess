@@ -8,6 +8,10 @@ import androidx.lifecycle.ViewModel
 
 val darkSquare = Color(0xFF779556)
 val lightSquare = Color(0xFFEBECD0)
+
+val notActiveTimerColor = Color(0xFF767676)
+val activeTimerColor = Color(0xFF007e3f)
+
 val rowName = listOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
 
 val selectedColor = Color(0xFFf2f28d)//Color(0xFFefef76)

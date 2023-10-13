@@ -17,6 +17,11 @@ class ChessModel : ViewModel(){
     var whiteKingPos by mutableStateOf("")
     var blackKingPos by mutableStateOf("")
 
+    /*
+
+
+     */
+
     init{
         boardState.clear()
         occupiedSquares.whiteOccupiedSquares.clear()
