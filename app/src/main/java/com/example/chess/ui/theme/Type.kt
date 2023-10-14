@@ -25,6 +25,14 @@ val autourOne = FontFamily(
         style = FontStyle.Normal
     )
 )
+val archivo = FontFamily(
+    Font(
+        googleFont = GoogleFont("Archivo"),
+        fontProvider = provider,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
+    )
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(

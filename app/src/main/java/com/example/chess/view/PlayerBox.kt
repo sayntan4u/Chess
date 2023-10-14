@@ -34,6 +34,8 @@ import com.example.chess.model.activeTimerColor
 import com.example.chess.model.chessPieceUnicodeBlack
 import com.example.chess.model.chessPieceUnicodeWhite
 import com.example.chess.model.notActiveTimerColor
+
+import com.example.chess.ui.theme.archivo
 import com.example.chess.ui.theme.autourOne
 import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
@@ -121,7 +123,8 @@ fun playerBox(
                             modifier = Modifier
                         )
                     }
-                }else{
+                }
+                else{
                     for(p in capturedPieces.byBlackCapturedPieces){
                         Text(
                             text= chessPieceUnicodeWhite[p].toString(),
@@ -151,13 +154,15 @@ fun playerBox(
 
             Text(
                 text = timeLeft,
-                fontFamily = autourOne,
+                fontFamily = archivo,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFf5f5f5),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 15.dp)
                     .width(60.dp)
+                    //.background(Color.Cyan)
             )
         }
 
