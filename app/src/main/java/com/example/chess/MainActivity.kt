@@ -27,7 +27,6 @@ import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.chess.model.ChessModel
-import com.example.chess.model.ChessTimer
 import com.example.chess.model.Clan
 import com.example.chess.model.Piece
 import com.example.chess.ui.theme.ChessTheme
@@ -40,7 +39,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var cm = ChessModel()
-        var timer = ChessTimer()
         setContent {
             ChessTheme {
                 // A surface container using the 'background' color from the theme
@@ -52,9 +50,9 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        playerBox(playerName = "Player 1", cm.currentSide, Clan.BLACK, timer, timer.timeRemaining[Clan.BLACK].toString())
+                        playerBox(playerName = "Player 1", cm.currentSide, Clan.BLACK)
                         board(cm)
-                        playerBox(playerName = "Player 2", cm.currentSide, Clan.WHITE,timer, timer.timeRemaining[Clan.WHITE].toString())
+                        playerBox(playerName = "Player 2", cm.currentSide, Clan.WHITE)
                     }
                 }
             }

@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,35 +26,51 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import com.example.chess.model.ChessTimer
 import com.example.chess.model.Clan
 import com.example.chess.model.activeTimerColor
 import com.example.chess.model.notActiveTimerColor
 import com.example.chess.ui.theme.autourOne
+import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
 
 @Composable
 fun playerBox(
     playerName :String,
     currentSide : Clan,
-    clan : Clan,
-    timer : ChessTimer,
-    timeRemaining : String
+    clan : Clan
 ){
 
     var timerBGColor = if(currentSide == clan) activeTimerColor else notActiveTimerColor
 
-    if(currentSide == clan){
-        if(clan == Clan.WHITE){
-            timer.startWhite()
-        }
-        else{
-            timer.pauseWhite()
+    var secondsLeft by remember { mutableIntStateOf(599) }
+    var isPaused by remember { mutableStateOf(false) }
+    var timeLeft by remember {
+        mutableStateOf("10:00")
+    }
+
+    isPaused = currentSide != clan
+
+    LaunchedEffect(key1 = secondsLeft, key2 = isPaused, key3 = timeLeft) {
+        while (secondsLeft > 0 && !isPaused) {
+            delay(1000L)
+
+            var min = (secondsLeft / 60).toString()
+            var sec = (secondsLeft % 60).toString()
+
+            if(min.toString().count() < 2){
+               min = "0$min"
+            }
+            if(sec.toString().count() < 2){
+                sec = "0$sec"
+            }
+
+            timeLeft = "$min:$sec"
+
+            secondsLeft--
+
         }
     }
 
-   // var timeRemaining = timer.timeRemaining[clan].toString()
 
     Row(
         modifier = Modifier
@@ -83,14 +101,14 @@ fun playerBox(
             verticalAlignment = Alignment.CenterVertically)
         {
             Text(
-                text = timeRemaining,//cm.currentSide.toString(),
+                text = timeLeft,
                 fontFamily = autourOne,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFf5f5f5),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 15.dp)
-                    .width(50.dp)
+                    .width(60.dp)
             )
         }
 
