@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.sp
 import com.example.chess.model.CapturedPieces
 import com.example.chess.model.Clan
 import com.example.chess.model.activeTimerColor
+import com.example.chess.model.chessPieceUnicodeBlack
+import com.example.chess.model.chessPieceUnicodeWhite
 import com.example.chess.model.notActiveTimerColor
 import com.example.chess.ui.theme.autourOne
 import kotlinx.coroutines.delay
@@ -88,7 +90,7 @@ fun playerBox(
             //.height(65.dp)
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth()
-            .background(Color(0xFF262626), shape = RoundedCornerShape(5.dp))
+            .background(Color(0xFF727272), shape = RoundedCornerShape(5.dp))
             .height(70.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -98,17 +100,38 @@ fun playerBox(
             Text(
                 text = playerName,//cm.currentSide.toString(),
                 fontFamily = autourOne,
-                fontSize = 12.sp,
-                color = Color(0xFFf5f5f5),
+                fontSize = 14.sp,
+                color = Color(0xFF262626),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .padding(start = 20.dp, top = 5.dp, bottom = 5.dp)
+                    .padding(start = 15.dp, top = 5.dp, bottom = 5.dp)
             )
-            Text(
-                text= if(clan == Clan.WHITE)capturedPieces.byWhiteCapturedPieces.toString() else capturedPieces.byBlackCapturedPieces.toString(),
+            Row(
                 modifier = Modifier
-                    .padding(start = 20.dp)
-                )
+
+                    .padding(start = 15.dp, top = 5.dp, bottom = 5.dp)
+                    .height(20.dp),
+                verticalAlignment = Alignment.CenterVertically) {
+
+                if(clan == Clan.WHITE){
+                    for(p in capturedPieces.byWhiteCapturedPieces){
+                        Text(
+                            text= chessPieceUnicodeBlack[p].toString(),
+                            //fontSize = 14.sp,
+                            modifier = Modifier
+                        )
+                    }
+                }else{
+                    for(p in capturedPieces.byBlackCapturedPieces){
+                        Text(
+                            text= chessPieceUnicodeWhite[p].toString(),
+                            modifier = Modifier
+                        )
+                    }
+                }
+
+            }
+
         }
 
 
@@ -119,7 +142,7 @@ fun playerBox(
         Row(
             modifier = Modifier
                 //.height(65.dp)
-                .padding(end = 20.dp)
+                .padding(end = 15.dp)
                 .background(timerBGColor, shape = RoundedCornerShape(5.dp))
                 //.border(1.dp, Color(0xFFf5f5f5), shape = RoundedCornerShape(5.dp))
                 .height(40.dp),

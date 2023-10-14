@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 val darkSquare = Color(0xFF779556)
 val lightSquare = Color(0xFFEBECD0)
 
-val notActiveTimerColor = Color(0xFF767676)
+val notActiveTimerColor = Color(0xFF262626)
 val activeTimerColor = Color(0xFF007e3f)
 
 val rowName = listOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
@@ -59,6 +59,24 @@ enum class Clan{
 enum class Piece{
     R,N,B,K,Q,P,EMPTY
 }
+
+val chessPieceUnicodeWhite = mapOf<Piece,String>(
+    Piece.P to "\u2659",
+    Piece.R to "\u2656",
+    Piece.N to "\u2658",
+    Piece.B to "\u2657",
+    Piece.K to "\u2654",
+    Piece.Q to "\u2655",
+)
+
+val chessPieceUnicodeBlack = mapOf<Piece,String>(
+    Piece.P to "\u265F",
+    Piece.R to "\u265C",
+    Piece.N to "\u265E",
+    Piece.B to "\u265D",
+    Piece.K to "\u265A",
+    Piece.Q to "\u265B",
+)
 
 
 
