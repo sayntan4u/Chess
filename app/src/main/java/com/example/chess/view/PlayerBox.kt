@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.chess.model.CapturedPieces
 import com.example.chess.model.Clan
 import com.example.chess.model.activeTimerColor
 import com.example.chess.model.notActiveTimerColor
@@ -37,7 +40,8 @@ import java.util.concurrent.TimeUnit
 fun playerBox(
     playerName :String,
     currentSide : Clan,
-    clan : Clan
+    clan : Clan,
+    capturedPieces : CapturedPieces
 ){
 
     var secondsLeft by remember { mutableIntStateOf(599) }
@@ -46,7 +50,7 @@ fun playerBox(
         mutableStateOf("10:00")
     }
     var timerBGColor = if(currentSide == clan){
-        if(secondsLeft < 580){
+        if(secondsLeft < 60){
             Color(0xFFff4d4d)
         }
         else{
@@ -79,26 +83,39 @@ fun playerBox(
         }
     }
 
-
     Row(
         modifier = Modifier
             //.height(65.dp)
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth()
             .background(Color(0xFF262626), shape = RoundedCornerShape(5.dp))
-            .height(60.dp),
+            .height(70.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
 
     ) {
-        Text(
-            text = playerName,//cm.currentSide.toString(),
-            fontFamily = autourOne,
-            color = Color(0xFFf5f5f5),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(15.dp)
-        )
+        Column {
+            Text(
+                text = playerName,//cm.currentSide.toString(),
+                fontFamily = autourOne,
+                fontSize = 12.sp,
+                color = Color(0xFFf5f5f5),
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(start = 20.dp, top = 5.dp, bottom = 5.dp)
+            )
+            Text(
+                text= if(clan == Clan.WHITE)capturedPieces.byWhiteCapturedPieces.toString() else capturedPieces.byBlackCapturedPieces.toString(),
+                modifier = Modifier
+                    .padding(start = 20.dp)
+                )
+        }
+
+
+        /*
+        Timer Implementation
+         */
+
         Row(
             modifier = Modifier
                 //.height(65.dp)
@@ -108,6 +125,7 @@ fun playerBox(
                 .height(40.dp),
             verticalAlignment = Alignment.CenterVertically)
         {
+
             Text(
                 text = timeLeft,
                 fontFamily = autourOne,

@@ -50,9 +50,9 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        playerBox(playerName = "Player 1", cm.currentSide, Clan.BLACK)
+                        playerBox(playerName = "Player 1", cm.currentSide, Clan.BLACK, cm.capturedPieces)
                         board(cm)
-                        playerBox(playerName = "Player 2", cm.currentSide, Clan.WHITE)
+                        playerBox(playerName = "Player 2", cm.currentSide, Clan.WHITE, cm.capturedPieces)
                     }
                 }
             }
