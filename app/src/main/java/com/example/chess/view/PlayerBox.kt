@@ -46,7 +46,7 @@ fun playerBox(
         mutableStateOf("10:00")
     }
     var timerBGColor = if(currentSide == clan){
-        if(secondsLeft < 60){
+        if(secondsLeft < 580){
             Color(0xFFff4d4d)
         }
         else{
@@ -66,10 +66,10 @@ fun playerBox(
             var min = (secondsLeft / 60).toString()
             var sec = (secondsLeft % 60).toString()
 
-            if(min.count() < 2){
+            if(min.toString().count() < 2){
                min = "0$min"
             }
-            if(sec.count() < 2){
+            if(sec.toString().count() < 2){
                 sec = "0$sec"
             }
 
