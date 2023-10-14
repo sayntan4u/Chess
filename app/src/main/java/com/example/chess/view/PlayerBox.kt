@@ -59,6 +59,7 @@ fun playerBox(
     isPaused = currentSide != clan
 
     if(secondsLeft < 60){
+
         timerBGColor = Color(0xFFff4d4d)
     }
 
