@@ -40,15 +40,27 @@ fun playerBox(
     clan : Clan
 ){
 
-    var timerBGColor = if(currentSide == clan) activeTimerColor else notActiveTimerColor
-
     var secondsLeft by remember { mutableIntStateOf(599) }
     var isPaused by remember { mutableStateOf(false) }
     var timeLeft by remember {
         mutableStateOf("10:00")
     }
+    var timerBGColor = if(currentSide == clan){
+        if(secondsLeft < 60){
+            Color(0xFFff4d4d)
+        }
+        else{
+            activeTimerColor
+        }
+    } else{
+        notActiveTimerColor
+    }
 
     isPaused = currentSide != clan
+
+    if(secondsLeft < 60){
+        timerBGColor = Color(0xFFff4d4d)
+    }
 
     LaunchedEffect(key1 = secondsLeft, key2 = isPaused, key3 = timeLeft) {
         while (secondsLeft > 0 && !isPaused) {
@@ -96,7 +108,7 @@ fun playerBox(
                 //.height(65.dp)
                 .padding(end = 20.dp)
                 .background(timerBGColor, shape = RoundedCornerShape(5.dp))
-                .border(1.dp, Color(0xFFf5f5f5), shape = RoundedCornerShape(5.dp))
+                //.border(1.dp, Color(0xFFf5f5f5), shape = RoundedCornerShape(5.dp))
                 .height(40.dp),
             verticalAlignment = Alignment.CenterVertically)
         {

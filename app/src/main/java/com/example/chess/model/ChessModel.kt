@@ -9,6 +9,7 @@ class ChessModel : ViewModel(){
 
     var boardState by mutableStateOf(mutableListOf(SquareState()))
     var occupiedSquares by mutableStateOf(OccupiedSquares())
+    var capturedPieces by mutableStateOf(CapturedPieces())
     var availableMoves by mutableStateOf(mutableListOf(""))
     var previousSquare by mutableStateOf(SquareState())
 
@@ -17,15 +18,15 @@ class ChessModel : ViewModel(){
     var whiteKingPos by mutableStateOf("")
     var blackKingPos by mutableStateOf("")
 
-    /*
 
-
-     */
 
     init{
         boardState.clear()
         occupiedSquares.whiteOccupiedSquares.clear()
         occupiedSquares.blackOccupiedSquares.clear()
+
+        capturedPieces.byWhiteCapturedPieces.clear()
+        capturedPieces.byBlackCapturedPieces.clear()
 
         //Setup the initial pieces
         for (i in 0 until 8) {

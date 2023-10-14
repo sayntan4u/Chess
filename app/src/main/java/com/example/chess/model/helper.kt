@@ -24,6 +24,11 @@ class OccupiedSquares : ViewModel() {
 
 }
 
+class CapturedPieces : ViewModel() {
+    var byWhiteCapturedPieces by mutableStateOf(mutableListOf(Piece.EMPTY))
+    var byBlackCapturedPieces by mutableStateOf(mutableListOf(Piece.EMPTY))
+}
+
 class SquareState (
     piece : Piece = Piece.EMPTY,
     clan : Clan = Clan.EMPTY,
