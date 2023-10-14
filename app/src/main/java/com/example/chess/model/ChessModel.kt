@@ -1352,10 +1352,13 @@ class ChessModel : ViewModel(){
 
     fun movePiece(from : String, to : String){
 
-        println("current side : $currentSide")
-        println("from move piece $from(" + getSquareAt(from).piece.toString() + " , " + getSquareAt(from).clan.toString() + ") -> $to("+ getSquareAt(to).piece.toString() + " , " + getSquareAt(to).clan.toString() +") : ")
+        val fromSquare = getSquareAt(from)
+        val toSquare = getSquareAt(to)
 
-        if(getSquareAt(from).clan == Clan.WHITE){
+        println("current side : $currentSide")
+        println("from move piece $from(" + fromSquare.piece.toString() + " , " + fromSquare.clan.toString() + ") -> $to("+ toSquare.piece.toString() + " , " + toSquare.clan.toString() +") : ")
+
+        if(fromSquare.clan == Clan.WHITE){
             currentSide = Clan.BLACK
         }
         else{
@@ -1363,26 +1366,34 @@ class ChessModel : ViewModel(){
         }
 
 
-        if(getSquareAt(from).clan == Clan.BLACK){
+        if(fromSquare.clan == Clan.BLACK){
             currentSide = Clan.WHITE
             occupiedSquares.blackOccupiedSquares.remove(from)
             occupiedSquares.blackOccupiedSquares.add(to)
         }
-        if(getSquareAt(from).clan == Clan.WHITE){
+        if(fromSquare.clan == Clan.WHITE){
             occupiedSquares.whiteOccupiedSquares.remove(from)
             occupiedSquares.whiteOccupiedSquares.add(to)
         }
 
-        if(getSquareAt(to).clan == Clan.BLACK){
+        if(toSquare.clan == Clan.BLACK){
             occupiedSquares.blackOccupiedSquares.remove(to)
-        }else if(getSquareAt(to).clan == Clan.WHITE){
+            capturedPieces.byWhiteCapturedPieces.add(toSquare.piece)
+        }else if(toSquare.clan == Clan.WHITE){
             occupiedSquares.whiteOccupiedSquares.remove(to)
+            capturedPieces.byBlackCapturedPieces.add(toSquare.piece)
         }
 
+
+
+        //move mechanism
         setSquareAt(to, getSquareAt(from))
         setEmptySquareAt(from)
 
         println("from move piece $from(" + getSquareAt(from).piece.toString() + " , " + getSquareAt(from).clan.toString() + ") -> $to("+ getSquareAt(to).piece.toString() + " , " + getSquareAt(to).clan.toString() +") : ")
         println("current side : $currentSide")
+
+        println("captured pieces white : " + capturedPieces.byWhiteCapturedPieces)
+        println("captured pieces black : " + capturedPieces.byBlackCapturedPieces)
     }
 }

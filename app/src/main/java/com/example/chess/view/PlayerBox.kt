@@ -46,7 +46,7 @@ fun playerBox(
         mutableStateOf("10:00")
     }
     var timerBGColor = if(currentSide == clan){
-        if(secondsLeft < 580){
+        if(secondsLeft < 60){
             Color(0xFFff4d4d)
         }
         else{
@@ -58,9 +58,6 @@ fun playerBox(
 
     isPaused = currentSide != clan
 
-    if(secondsLeft < 60){
-        timerBGColor = Color(0xFFff4d4d)
-    }
 
     LaunchedEffect(key1 = secondsLeft, key2 = isPaused, key3 = timeLeft) {
         while (secondsLeft > 0 && !isPaused) {
@@ -69,10 +66,10 @@ fun playerBox(
             var min = (secondsLeft / 60).toString()
             var sec = (secondsLeft % 60).toString()
 
-            if(min.toString().count() < 2){
+            if(min.count() < 2){
                min = "0$min"
             }
-            if(sec.toString().count() < 2){
+            if(sec.count() < 2){
                 sec = "0$sec"
             }
 
