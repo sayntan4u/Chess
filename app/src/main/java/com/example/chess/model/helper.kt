@@ -1,6 +1,8 @@
 package com.example.chess.model
 
+import android.os.CountDownTimer
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
@@ -52,3 +54,71 @@ enum class Clan{
 enum class Piece{
     R,N,B,K,Q,P,EMPTY
 }
+
+class ChessTimer : ViewModel(){
+
+    var timeRemaining by mutableStateOf( mutableMapOf<Clan,String>(
+        Clan.WHITE to "10:00",
+        Clan.BLACK to "10:00"
+    ))
+
+    var millisecondRemainingWhite by mutableLongStateOf(600000L)
+    var millisecondRemainingBlack by mutableLongStateOf(600000L)
+
+    private val timerWhite = object: CountDownTimer(millisecondRemainingWhite, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            millisecondRemainingWhite = millisUntilFinished
+            val minutes = (millisUntilFinished / 1000) / 60
+            val seconds = (millisUntilFinished / 1000) % 60
+
+            timeRemaining[Clan.WHITE] = "$minutes:$seconds"
+
+            println(timeRemaining)
+        }
+
+        override fun onFinish() {}
+    }
+
+    private val timerBlack = object: CountDownTimer(millisecondRemainingBlack, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            millisecondRemainingBlack = millisUntilFinished
+            val minutes = (millisUntilFinished / 1000) / 60
+            val seconds = (millisUntilFinished / 1000) % 60
+
+            timeRemaining[Clan.BLACK] = "$minutes:$seconds"
+        }
+
+        override fun onFinish() {}
+    }
+
+    fun startWhite(){
+        timerWhite.start()
+    }
+
+    fun pauseWhite(){
+        timerWhite.cancel()
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

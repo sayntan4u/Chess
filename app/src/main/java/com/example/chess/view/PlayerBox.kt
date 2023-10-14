@@ -2,6 +2,7 @@ package com.example.chess.view
 
 import android.os.CountDownTimer
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,15 +13,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import com.example.chess.model.ChessTimer
 import com.example.chess.model.Clan
 import com.example.chess.model.activeTimerColor
 import com.example.chess.model.notActiveTimerColor
@@ -31,12 +36,23 @@ import java.util.concurrent.TimeUnit
 fun playerBox(
     playerName :String,
     currentSide : Clan,
-    clan : Clan
+    clan : Clan,
+    timer : ChessTimer,
+    timeRemaining : String
 ){
 
     var timerBGColor = if(currentSide == clan) activeTimerColor else notActiveTimerColor
 
-    var timeRemaining = "10:00"
+    if(currentSide == clan){
+        if(clan == Clan.WHITE){
+            timer.startWhite()
+        }
+        else{
+            timer.pauseWhite()
+        }
+    }
+
+   // var timeRemaining = timer.timeRemaining[clan].toString()
 
     Row(
         modifier = Modifier
@@ -44,7 +60,6 @@ fun playerBox(
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth()
             .background(Color(0xFF262626), shape = RoundedCornerShape(5.dp))
-            //.border(1.dp, Color(0xFFffffff), shape = RectangleShape)
             .height(60.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -63,7 +78,7 @@ fun playerBox(
                 //.height(65.dp)
                 .padding(end = 20.dp)
                 .background(timerBGColor, shape = RoundedCornerShape(5.dp))
-                //.border(1.dp, Color(0xFFffffff), shape = RectangleShape)
+                .border(1.dp, Color(0xFFf5f5f5), shape = RoundedCornerShape(5.dp))
                 .height(40.dp),
             verticalAlignment = Alignment.CenterVertically)
         {
