@@ -58,7 +58,6 @@ fun playerBox(
 
     isPaused = currentSide != clan
 
-
     LaunchedEffect(key1 = secondsLeft, key2 = isPaused, key3 = timeLeft) {
         while (secondsLeft > 0 && !isPaused) {
             delay(1000L)
