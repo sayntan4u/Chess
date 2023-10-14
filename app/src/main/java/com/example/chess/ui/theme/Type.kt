@@ -34,6 +34,27 @@ val archivo = FontFamily(
     )
 )
 
+val artifika = FontFamily(
+    Font(
+        googleFont = GoogleFont("Artifika"),
+        fontProvider = provider,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
+    )
+)
+
+val astloch = FontFamily(
+    Font(
+        googleFont = GoogleFont("Astloch"),
+        fontProvider = provider,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
+    )
+)
+
+
+
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
