@@ -65,9 +65,11 @@ class MainActivity : ComponentActivity() {
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier.fillMaxWidth().padding(top=40.dp)
                         ) {
-                            playerBox(playerName = "Abundance 1", cm.currentSide, Clan.BLACK, cm.capturedPieces)
+
+                            playerBox(playerName = "Abundance", cm.currentSide, Clan.BLACK, cm.capturedPieces)
                             board(cm)
-                            playerBox(playerName = "Abundance 2", cm.currentSide, Clan.WHITE, cm.capturedPieces)
+                            playerBox(playerName = "Wealth", cm.currentSide, Clan.WHITE, cm.capturedPieces)
+
                         }
                     }
 

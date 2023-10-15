@@ -18,8 +18,6 @@ class ChessModel : ViewModel(){
     var whiteKingPos by mutableStateOf("")
     var blackKingPos by mutableStateOf("")
 
-
-
     init{
         boardState.clear()
         occupiedSquares.whiteOccupiedSquares.clear()
@@ -1365,7 +1363,6 @@ class ChessModel : ViewModel(){
             currentSide = Clan.WHITE
         }
 
-
         if(fromSquare.clan == Clan.BLACK){
             currentSide = Clan.WHITE
             occupiedSquares.blackOccupiedSquares.remove(from)
@@ -1379,12 +1376,11 @@ class ChessModel : ViewModel(){
         if(toSquare.clan == Clan.BLACK){
             occupiedSquares.blackOccupiedSquares.remove(to)
             capturedPieces.byWhiteCapturedPieces.add(toSquare.piece)
-        }else if(toSquare.clan == Clan.WHITE){
+        }
+        else if(toSquare.clan == Clan.WHITE){
             occupiedSquares.whiteOccupiedSquares.remove(to)
             capturedPieces.byBlackCapturedPieces.add(toSquare.piece)
         }
-
-
 
         //move mechanism
         setSquareAt(to, getSquareAt(from))
