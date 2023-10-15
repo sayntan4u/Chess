@@ -142,6 +142,8 @@ fun board(model : ChessModel){
                                 }
 
                                 println("______________________")
+                                println("White Attacked pos : " + model.attackedSquares.whiteAttackedSquares)
+                                println("Black Attacked pos : " + model.attackedSquares.blackAttackedSquares)
                             }
                         )
                         x += 1

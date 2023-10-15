@@ -24,6 +24,12 @@ class OccupiedSquares : ViewModel() {
 
 }
 
+class AttackedSquares : ViewModel() {
+    var whiteAttackedSquares by mutableStateOf(mutableListOf(""))
+    var blackAttackedSquares by mutableStateOf(mutableListOf(""))
+
+}
+
 class CapturedPieces : ViewModel() {
     var byWhiteCapturedPieces by mutableStateOf(mutableListOf(Piece.EMPTY))
     var byBlackCapturedPieces by mutableStateOf(mutableListOf(Piece.EMPTY))
